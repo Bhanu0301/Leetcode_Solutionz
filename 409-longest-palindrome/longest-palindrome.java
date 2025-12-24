@@ -18,4 +18,5 @@ class Solution {
         }
         return hasOdd==true?maxLen+1:maxLen;
     }
+    // also check this solution : https://leetcode.com/problems/longest-palindrome/solutions/89604/simple-hashset-solution-java-by-charlieb-8z2c/
 }
