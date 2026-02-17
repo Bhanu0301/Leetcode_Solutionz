@@ -9,8 +9,14 @@ class Solution {
     }
     public int climbStairs(int n) {
         int[] dp = new int[n+2];
-        Arrays.fill(dp,-1);
-        return climbStairsHelp(n,dp);
+        dp[0]=1;
+        dp[1]=1;
+        for(int i = 2;i<=n;i++){
+            int oneStep = dp[i-1];
+            int twoSteps = dp[i-2];
+            dp[i] = oneStep + twoSteps;
+        }
+        return dp[n];
     }
 }
 /*
