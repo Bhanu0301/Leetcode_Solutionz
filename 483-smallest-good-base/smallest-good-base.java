@@ -16,7 +16,7 @@ class Solution {
 
         for(int i = maxTerms; i>=2; i--){//terms
             long left = 2;
-            long right = (long) Math.pow(num, 1.0 / (i - 1)) + 5;
+            long right = (long) Math.pow(num, 1.0 / (i - 1));
 
             while(left<=right){
                 long mid = left + (right-left)/2;
