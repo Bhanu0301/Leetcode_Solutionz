@@ -1,19 +1,20 @@
 class Solution {
-    private boolean helper(int[] nums, int target, int ind, int n, Boolean[][] dp){
-        if(target==0)return true;
-        if(ind==n || target<0)return false;
-        if(dp[ind][target]!=null)return dp[ind][target];
-        boolean take = helper(nums, target-nums[ind],ind+1,n, dp);
-        boolean notTake = helper(nums, target, ind+1, n, dp);
-        return dp[ind][target] = (take || notTake);
-    }
     private boolean targetSum(int nums[], int target){
         int n = nums.length;
-        Boolean[][] dp = new Boolean[n][target+1];
-        // for(int arr[]: dp){
-        //     Arrays.fill(arr, false);
-        // }
-        return helper(nums, target, 0, n, dp);
+        
+        boolean[][] dp = new boolean[n+1][target+1];
+        for(int i = 0;i<n; i++){
+            dp[i][0] = true;
+        }
+        for(int ind = n-1;ind>=0; ind--){
+            for(int sum = 1;sum<=target; sum++){
+                boolean take = false;
+                if(nums[ind]<=sum)take = dp[ind+1][sum-nums[ind]];
+                boolean notTake = dp[ind+1][sum];
+                dp[ind][sum] = (take || notTake);
+            }
+        }
+        return dp[0][target];
     }
     public boolean canPartition(int[] nums) {
         //It is target sum where target = sum(nums)-sum(nums)/2;
