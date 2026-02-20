@@ -1,30 +1,22 @@
 class Solution {
-    private int ones(String str){
-        int ones = 0;
-        char[] strChars = str.toCharArray();
-        for(char c : strChars){
-            if(c=='1'){
-                ones++;
-            }
-        }
-        return ones;
-    }
-    private int zeros(String str){
+    private int[] countZerosOnes(String str){
         int zeros = 0;
+        int ones = 0;
         char[] strChars = str.toCharArray();
         for(char c : strChars){
             if(c=='0'){
                 zeros++;
             }
         }
-        return zeros;
+        ones = str.length() - zeros;
+        return new int[]{zeros, ones};
     }
     private int helper(String[] strs, int m, int n, int ind, int[][][] dp){
         if(ind==strs.length)return 0;
-        if(m<0 || n<0)return Integer.MIN_VALUE;
         if(dp[ind][m][n]!=-1)return dp[ind][m][n];
-        int z = zeros(strs[ind]);
-        int o = ones(strs[ind]);
+        int[] count = countZerosOnes(strs[ind]);
+        int z = count[0];
+        int o = count[1];
         int take = 0;
         if(m>=z && n>=o)
             take = 1 + helper(strs, m-z, n-o, ind+1, dp);
