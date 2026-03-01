@@ -15,7 +15,7 @@ class Solution {
             freq[s.charAt(r)-'A']++;
             maxCount = Math.max(maxCount, freq[s.charAt(r)-'A']);
             //remaning elem count = r-l-maxCount+1
-            while(r-l-maxCount+1>k){ //=> diff chars > k
+            if(r-l-maxCount+1>k){ //=> diff chars > k
                 freq[s.charAt(l)-'A']--;
                 l++;
             }
